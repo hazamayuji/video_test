@@ -2,7 +2,7 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-    ofToggleFullscreen();
+    //ofToggleFullscreen();
     ofSetBackgroundColor(0,0,0);
     ofEnableSmoothing();//画面の混色の設定を加算合成にする
     
@@ -30,6 +30,35 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+    
+    ofSetColor(255, 255, 255);
+    vidGrabber.draw(10,20,ofGetWidth()/5,ofGetHeight()/5);
+   
+    unsigned char * pixels =  vidGrabber.getPixels().getData();
+    int w = camWidth;
+    int h = camHeight;
+    for (int i = 0; i < w; i+= 3){
+        for (int j = 0; j < h; j+= 3){
+            int valueR = pixels[j * w + i*3];
+            int valueG = pixels[j * w + i*3+1];
+            int valueB = pixels[j * w + i*3+2];
+            
+            ofSetColor(255, 0, 0, 63);
+            ofDrawCircle(ofGetWidth()/5+20+i*2, 20+j*2, 4.0*valueR/255.0);
+
+            
+            ofSetColor(0, 255, 0, 63);
+            ofDrawCircle(ofGetWidth()/5+20+i*2, 20+j*2, 4.0*valueG/255.0);
+
+            
+            ofSetColor(0, 0, 255, 63);
+            ofDrawCircle(ofGetWidth()/5+20+i*2, 20+j*2, 4.0*valueB/255.0);
+
+        }
+    }
+}
+    
+/*
     //myPlayer.draw(0,0,ofGetWidth(),ofGetHeight());
     
     ofSetColor(0xffffff);
@@ -54,7 +83,7 @@ void ofApp::draw(){
     }
 
 }
-
+    */
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
 
