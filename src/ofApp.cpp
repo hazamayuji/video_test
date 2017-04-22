@@ -35,13 +35,13 @@ void ofApp::draw(){
     vidGrabber.draw(10,20,ofGetWidth()/5,ofGetHeight()/5);
    
     unsigned char * pixels =  vidGrabber.getPixels().getData();
-    int w = camWidth;
-    int h = camHeight;
+    int w = vidGrabber.getWidth();
+    int h = vidGrabber.getHeight();
     for (int i = 0; i < w; i+= 3){
         for (int j = 0; j < h; j+= 3){
-            int valueR = pixels[j * w + i*3];
-            int valueG = pixels[j * w + i*3+1];
-            int valueB = pixels[j * w + i*3+2];
+            int valueR = pixels[(j * w + i)*3];
+            int valueG = pixels[(j * w + i)*3+1];
+            int valueB = pixels[(j * w + i)*3+2];
             
             ofSetColor(255, 0, 0, 63);
             ofDrawCircle(ofGetWidth()/5+20+i*2, 20+j*2, 4.0*valueR/255.0);
